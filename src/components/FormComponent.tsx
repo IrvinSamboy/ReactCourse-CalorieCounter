@@ -81,10 +81,10 @@ export default function FormComponent() {
                     />
                 </div>
                 <button 
-                    className="bg-gray-800 text-white text-xl font-semibold w-full p-2"
-                    disabled={!isValidSubmit}
+                    className="bg-gray-800 text-white text-xl font-semibold w-full p-2 disabled:opacity-10"
+                    disabled={!isValidSubmit()}
                 >
-                    Save
+                    {activity.category === 1? "Save food" : "Save exercise"}
                 </button>
             </form>
         </section>
