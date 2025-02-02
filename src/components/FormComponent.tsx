@@ -25,7 +25,7 @@ export default function FormComponent() {
                     <select className=" border border-gray-400 rounded-lg p-1" name="" id="">
                         {
                             categories.map((item) => (
-                                <option key={item.id} value="">{item.name}</option>
+                                <option key={item.id} value={item.id}>{item.name}</option>
                             ))
                         }
                     </select>                </div>
