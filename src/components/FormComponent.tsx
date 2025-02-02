@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { categories } from "../data/categories";
 
 type activity = {
@@ -10,19 +10,42 @@ type activity = {
 export default function FormComponent() {
 
     const defaultActivity : activity = {
-        category: 0,
+        category: 1,
         name: '',
         calories: 0
     }
 
     const [activities, setActivities] = useState<activity[]>([defaultActivity])
+    const [activity, setActivity] = useState<activity>(defaultActivity)
+
+    const handleChange = (e : React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement> ) => {
+        setActivity({
+            ...activity,
+            [e.target.id === "activity"? "name" : e.target.id] : e.target.value
+        })
+    }
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        setActivities([
+            ...activities,
+            activity
+        ])
+    }
+
+    useEffect(() => console.log(activity), [activity])
 
     return (
         <section className="w-full bg-[#77C51E] py-20 px-auto">
-            <form action="" className="text-black w-4/5 mx-auto p-10 space-y-5 bg-white rounded-lg">
+            <form onSubmit={handleSubmit} action="" className="text-black w-4/5 mx-auto p-10 space-y-5 bg-white rounded-lg">
                 <div className="flex flex-col gap-2">
                     <label htmlFor="category" className="font-bold">Category</label>
-                    <select className=" border border-gray-400 rounded-lg p-1" id="category">
+                    <select 
+                        className=" border border-gray-400 rounded-lg p-1" 
+                        id="category" 
+                        value={activity.category}
+                        onChange={handleChange}
+                    >
                         {
                             categories.map((item) => (
                                 <option key={item.id} value={item.id}>{item.name}</option>
@@ -32,11 +55,23 @@ export default function FormComponent() {
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="activity" className="font-bold">Activity</label>
-                    <input type="text" className=" border border-gray-400 rounded-lg p-1" id="activity" />
+                    <input 
+                        type="text" 
+                        className=" border border-gray-400 rounded-lg p-1" 
+                        id="activity" 
+                        value={activity.name} 
+                        onChange={handleChange}
+                    />
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="calories" className="font-bold">Calories</label>
-                    <input type="text" className=" border border-gray-400 rounded-lg p-1" id="calories" />
+                    <input 
+                        type="number" 
+                        className=" border border-gray-400 rounded-lg p-1" 
+                        id="calories" 
+                        value={activity.calories} 
+                        onChange={handleChange}
+                    />
                 </div>
                 <button className="bg-gray-800 text-white text-xl font-semibold w-full p-2">Save</button>
             </form>
