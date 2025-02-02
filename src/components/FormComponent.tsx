@@ -1,6 +1,22 @@
+import { useState } from "react";
 import { categories } from "../data/categories";
 
+type activity = {
+    category: 0 | 1,
+    name: string,
+    calories: number
+}
+
 export default function FormComponent() {
+
+    const defaultActivity : activity = {
+        category: 0,
+        name: '',
+        calories: 0
+    }
+
+    const [activities, setActivities] = useState<activity[]>([defaultActivity])
+
     return (
         <section className="w-full bg-[#77C51E] py-20 px-auto">
             <form action="" className="text-black w-4/5 mx-auto p-10 space-y-5 bg-white rounded-lg">
