@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { categories } from "../data/categories";
 import { activity } from "../types";
+import { ActivityActions } from "../reducers/activity-reducer";
 
-export default function FormComponent() {
+type FormComponentProps = {
+    dispatch: React.Dispatch<ActivityActions>
+}
+
+export default function FormComponent({dispatch} : FormComponentProps) {
 
     const defaultActivity : activity = {
         category: 1,
@@ -10,7 +15,6 @@ export default function FormComponent() {
         calories: 0
     }
 
-    const [activities, setActivities] = useState<activity[]>([defaultActivity])
     const [activity, setActivity] = useState<activity>(defaultActivity)
 
     const handleChange = (e : React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement> ) => {
@@ -26,10 +30,7 @@ export default function FormComponent() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        setActivities([
-            ...activities,
-            activity
-        ])
+       dispatch({type: 'set-activity', payload: {newActivity: activity}})
     }
 
    const isValidSubmit = () => {
