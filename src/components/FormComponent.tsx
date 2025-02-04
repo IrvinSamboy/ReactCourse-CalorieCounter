@@ -1,11 +1,6 @@
 import { useState } from "react";
 import { categories } from "../data/categories";
-
-type activity = {
-    category: 0 | 1,
-    name: string,
-    calories: number
-}
+import { activity } from "../types";
 
 export default function FormComponent() {
 
