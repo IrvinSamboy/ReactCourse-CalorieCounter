@@ -18,8 +18,10 @@ export const activityReducer = (
     actions: ActivityActions  
 ) => {
     if(actions.type === 'set-activity') {
-        console.log("hi")
-       return state
+       return {
+        ...state,
+        activities: [...state.activities, actions.payload.newActivity]
+       }
     }
     return state
 }
