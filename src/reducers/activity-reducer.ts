@@ -19,6 +19,16 @@ export const activityReducer = (
     actions: ActivityActions  
 ) => {
     if(actions.type === 'set-activity') {
+        if(state.activeId) {
+            
+            const activitiesUpdated = [...state.activities.filter(item => item.id !== state.activeId), actions.payload.newActivity]
+            
+            return{
+                ...state,
+                activities: activitiesUpdated,
+                activeId: ''   
+            }
+        }
        return {
         ...state,
         activities: [...state.activities, actions.payload.newActivity]
