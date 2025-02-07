@@ -24,7 +24,9 @@ export default function FormComponent({dispatch, state} : FormComponentProps) {
     useEffect(() => {
         if(state.activeId) {
             const selectedActivity = state.activities.find(item => item.id === state.activeId)
-            setActivity{selectedActivity}
+            if(selectedActivity){
+                setActivity(selectedActivity)
+            }
         }
     }, [state.activeId])
 
