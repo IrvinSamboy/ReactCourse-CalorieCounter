@@ -18,6 +18,10 @@ export default function ActivityList({activities, dispatch} : ActivityListProps)
       dispatch({type: 'set-activeId', payload: {activeId: id}})
     }
 
+    const handleDeleteAcity = (id : string) => {
+      dispatch({type: 'delete-activity', payload: {activeId: id}})
+    }
+
     return (
     <section className="w-4/5 mx-auto space-y-4 mt-10 p-4">
       <h3 className="text-slate-600 text-center text-4xl font-bold">Food and activities</h3>
@@ -31,11 +35,17 @@ export default function ActivityList({activities, dispatch} : ActivityListProps)
                       <p className="font-bold text-xl">{activity.name}</p>
                       <h3 className="text-3xl text-lime-500 font-black">{activity.calories} Calories</h3>
                   </div>
-                  <div className="flex gap-5 items-center">
+                  <div className="flex flex-col gap-5 items-center">
                     <PencilSquareIcon 
                       onClick={() => handleSetActiveId(activity.id)}
                       className="size-8 text-gray-800"
                     />
+                    <p 
+                    className="text-center flex items-center justify-center cursor-pointer px-3 py-1.5 bg-red-500 rounded-full text-white font-bold"
+                    onClick={() => handleDeleteAcity(activity.id)}
+                    >
+                      X
+                    </p>
                   </div>
                 </div>
             </div>
