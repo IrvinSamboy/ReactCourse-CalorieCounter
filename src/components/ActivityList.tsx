@@ -1,6 +1,7 @@
 import { activity } from "../types"
 import { categories } from "../data/categories"
 import { useMemo } from "react"
+import { PencilSquareIcon } from '@heroicons/react/24/solid'
 
 export default function ActivityList({activities} : {activities: activity[]}) {
 
@@ -17,6 +18,9 @@ export default function ActivityList({activities} : {activities: activity[]}) {
                 <div className="space-y-3">
                     <p className="font-bold text-xl">{activity.name}</p>
                     <h3 className="text-3xl text-lime-500 font-black">{activity.calories} Calories</h3>
+                </div>
+                <div className="flex gap-5 items-center">
+                  <PencilSquareIcon className="size-8 text-gray-800" />
                 </div>
             </div>
         ))
