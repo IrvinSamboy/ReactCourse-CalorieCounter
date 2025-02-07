@@ -16,6 +16,7 @@ function App() {
       </header>
       <FormComponent
         dispatch={dispatch}
+        state={state}
       />
       <ActivityList 
         activities={state.activities}
