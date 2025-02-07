@@ -1,6 +1,7 @@
-import FormComponent from "./components/FormComponent"
 import { useReducer } from "react"
+import FormComponent from "./components/FormComponent"
 import { activityReducer, initialState } from "./reducers/activity-reducer"
+import ActivityList from "./components/ActivityList"
 
 function App() {
 
@@ -16,7 +17,9 @@ function App() {
       <FormComponent
         dispatch={dispatch}
       />
-
+      <ActivityList 
+        activities={state.activities}
+      />
     </div>
   )
 }
