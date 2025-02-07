@@ -8,9 +8,7 @@ type ActivityState = {
 }
 
 export const initialState : ActivityState = {
-    activities: [{category: 1,
-        name: '',
-        calories: 0}]
+    activities: []
 }
 
 export const activityReducer = (

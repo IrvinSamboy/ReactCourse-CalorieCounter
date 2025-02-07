@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
+
 import { categories } from "../data/categories";
 import { activity } from "../types";
 import { ActivityActions } from "../reducers/activity-reducer";
@@ -10,6 +12,7 @@ type FormComponentProps = {
 export default function FormComponent({dispatch} : FormComponentProps) {
 
     const defaultActivity : activity = {
+        id: uuidv4(),
         category: 1,
         name: '',
         calories: 0
@@ -31,6 +34,10 @@ export default function FormComponent({dispatch} : FormComponentProps) {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
        dispatch({type: 'set-activity', payload: {newActivity: activity}})
+       setActivity({
+        ...defaultActivity,
+        id: uuidv4()
+       })
     }
 
    const isValidSubmit = () => {
