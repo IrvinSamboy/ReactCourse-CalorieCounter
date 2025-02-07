@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 import { categories } from "../data/categories";
 import { activity } from "../types";
-import { ActivityActions } from "../reducers/activity-reducer";
+import { ActivityActions, ActivityState } from "../reducers/activity-reducer";
 
 type FormComponentProps = {
     dispatch: React.Dispatch<ActivityActions>
+    state: ActivityState
 }
 
-export default function FormComponent({dispatch} : FormComponentProps) {
+export default function FormComponent({dispatch, state} : FormComponentProps) {
 
     const defaultActivity : activity = {
         id: uuidv4(),
@@ -19,6 +20,13 @@ export default function FormComponent({dispatch} : FormComponentProps) {
     }
 
     const [activity, setActivity] = useState<activity>(defaultActivity)
+
+    useEffect(() => {
+        if(state.activeId) {
+            const selectedActivity = state.activities.find(item => item.id === state.activeId)
+            setActivity{selectedActivity}
+        }
+    }, [state.activeId])
 
     const handleChange = (e : React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement> ) => {
         setActivity({
