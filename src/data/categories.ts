@@ -2,11 +2,11 @@ import { Category } from "../types";
 
 export const categories : Category[] = [
     {
-        id: 1,
+        id: 0,
         name: "Food"
     },
     {
-        id: 2,
+        id: 1,
         name: "Exercise"
     }
 ]
