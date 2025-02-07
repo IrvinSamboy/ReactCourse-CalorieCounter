@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 import { categories } from "../data/categories";
@@ -14,12 +14,16 @@ export default function FormComponent({dispatch, state} : FormComponentProps) {
 
     const defaultActivity : activity = {
         id: uuidv4(),
-        category: 1,
+        category: 0,
         name: '',
         calories: 0
     }
 
     const [activity, setActivity] = useState<activity>(defaultActivity)
+
+    const saveEditMessage = useMemo(() => {
+        return state.activeId? "Edit" : "Save"
+    }, [state.activeId])
 
     useEffect(() => {
         if(state.activeId) {
@@ -97,7 +101,7 @@ export default function FormComponent({dispatch, state} : FormComponentProps) {
                     className="bg-gray-800 text-white text-xl font-semibold w-full p-2 disabled:opacity-10"
                     disabled={!isValidSubmit()}
                 >
-                    {activity.category === 1? "Save food" : "Save exercise"}
+                    {activity.category === 1? `${saveEditMessage} food` : `${saveEditMessage} exercise`}
                 </button>
             </form>
         </section>
