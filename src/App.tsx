@@ -19,6 +19,7 @@ function App() {
       />
       <ActivityList 
         activities={state.activities}
+        dispatch={dispatch}
       />
     </div>
   )
