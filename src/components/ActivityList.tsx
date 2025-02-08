@@ -25,6 +25,9 @@ export default function ActivityList({activities, dispatch} : ActivityListProps)
     return (
     <section className="w-4/5 mx-auto space-y-4 mt-10 p-4">
       <h3 className="text-slate-600 text-center text-4xl font-bold">Food and activities</h3>
+      {
+        activities.length === 0 && <p className="text-black text-center font-semibold">No activities</p>
+      }
       <div className="space-y-10">
         {
         activities.map(activity => (
