@@ -11,7 +11,7 @@ export type ActivityState = {
 }
 
 export const initialState : ActivityState = {
-    activities: [],
+    activities: JSON.parse(localStorage.getItem('activities') || '[]'),
     activeId: ''
 }
 
@@ -19,37 +19,44 @@ export const activityReducer = (
     state : ActivityState = initialState,
     actions: ActivityActions  
 ) => {
+
+    let returnState = state
+
     if(actions.type === 'set-activity') {
         if(state.activeId) {
             
             const activitiesUpdated = [...state.activities.filter(item => item.id !== state.activeId), actions.payload.newActivity]
             
-            return{
+            returnState = {
                 ...state,
                 activities: activitiesUpdated,
                 activeId: ''   
             }
         }
-       return {
-        ...state,
-        activities: [...state.activities, actions.payload.newActivity]
-       }
+        else{
+            returnState = {
+                ...state,
+                activities: [...state.activities, actions.payload.newActivity]
+               }
+        }
     }
 
-    if(actions.type === 'set-activeId') {
-        return {
+    else if(actions.type === 'set-activeId') {
+        returnState = {
             ...state,
             activeId: actions.payload.activeId
         }
     }
 
-    if(actions.type === 'delete-activity') {
-        return {
+    else if(actions.type === 'delete-activity') {
+        returnState = {
             ...state,
             activities: state.activities.filter(item => item.id !== actions.payload.activeId),
             activeId: ''
         }
     }
 
-    return state
+    localStorage.setItem('activities', JSON.stringify(returnState.activities))
+
+    return returnState
 }
