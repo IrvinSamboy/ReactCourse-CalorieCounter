@@ -2,6 +2,7 @@ import { useMemo, useReducer } from "react"
 import FormComponent from "./components/FormComponent"
 import { activityReducer, initialState } from "./reducers/activity-reducer"
 import ActivityList from "./components/ActivityList"
+import CalorieSummary from "./components/CalorieSummary"
 
 function App() {
 
@@ -23,6 +24,9 @@ function App() {
       <FormComponent
         dispatch={dispatch}
         state={state}
+      />
+      <CalorieSummary 
+        activities={state.activities}
       />
       <ActivityList 
         activities={state.activities}
