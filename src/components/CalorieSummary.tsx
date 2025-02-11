@@ -1,4 +1,5 @@
 import { activity } from "../types"
+import ParagraphSummary from "./paragraphSummary"
 
 type calorieSummaryProps = {
     activities : activity[]
@@ -15,18 +16,18 @@ export default function CalorieSummary({activities} : calorieSummaryProps) {
       <div className="w-4/5 mx-auto space-y-4">
         <p className="text-3xl text-center font-bold">Calories Summary</p>
         <div className="flex justify-between">
-            <div className="space-y-2 text-center">
-                <h2 className="text-4xl font-bold">{getCalorieTotal(0)}</h2>
-                <p className="font-medium">Consumed</p>
-            </div>
-            <div className="space-y-2 text-center">
-                <h2 className="text-4xl font-bold">{getCalorieTotal(1)}</h2>
-                <p className="font-medium">Excercise</p>
-            </div>
-            <div className="space-y-2 text-center">
-                <h2 className="text-4xl font-bold">{getCalorieTotal(0) - getCalorieTotal(0)}</h2>
-                <p className="font-medium">Diferences</p>
-            </div>
+            <ParagraphSummary 
+                text="Consumend"
+                value={getCalorieTotal(0)}
+            />
+            <ParagraphSummary 
+                text="Excercise"
+                value={getCalorieTotal(1)}
+            />
+            <ParagraphSummary 
+                text="Diference"
+                value={getCalorieTotal(0) - getCalorieTotal(0)}
+            />
         </div>
       </div>
     </div>
