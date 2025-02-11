@@ -10,8 +10,9 @@ function App() {
   return (
     <div className="w-screen text-white">
       <header className="bg-[#599814] p-4">
-          <div className="w-4/5 mx-auto">
+          <div className="w-4/5 mx-auto flex justify-between items-center">
             <p className="font-bold text-2xl">Calories counter</p>
+            <button className="rounded-lg bg-gray-900 text-sm font-semibold px-3 py-2">Restart app</button>
           </div>
       </header>
       <FormComponent
